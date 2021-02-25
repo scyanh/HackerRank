@@ -1,6 +1,6 @@
 package main
 
-import "github.com/scyanh/HackerRank/arrays"
+import "github.com/scyanh/HackerRank/inter"
 
 func main() {
 	// Modify Sequence *******
@@ -17,7 +17,7 @@ func main() {
 	//arrays.SwapsToOrderAsc()
 
 	// Sum in array
-	arrays.StartThis()
+	//arrays.StartThis()
 
 	// Create interfaces
 	//interfaces.StartThis()
@@ -37,4 +37,9 @@ func main() {
 	// Graph
 	//graph.StartThis()
 
+	// Arrays
+	//arrays.StartThis()
+
+	// Interview
+	inter.Prob1()
 }

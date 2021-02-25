@@ -419,6 +419,190 @@ func SpiralTraverse2() []int {
 	return result
 }
 
+func selectAWinner() {
+	competitions := [][]string{
+		{"HTML", "C#"},
+		{"C#", "Python"},
+		{"Python", "HTML"},
+	}
+	results := []int{0, 0, 1}
+
+	memo := make(map[string]int)
+
+	for i, result := range results {
+		if result == 1 {
+			fmt.Println(competitions[i][0])
+			memo[competitions[i][0]] += 3
+		} else {
+			fmt.Println(competitions[i][1])
+			memo[competitions[i][1]] += 3
+		}
+	}
+
+	type kv struct {
+		Key   string
+		Value int
+	}
+	var ss []kv
+	for k, v := range memo {
+		ss = append(ss, kv{k, v})
+	}
+
+	sort.Slice(ss, func(i, j int) bool {
+		return ss[i].Value > ss[j].Value
+	})
+
+	fmt.Println("winner=", ss[0].Key)
+	fmt.Println("winner=", ss[0].Value)
+}
+
+func MaxInt(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+func LongestPeak() {
+	//arr := []int{1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3}
+	var arr []int
+
+	i := 1
+	maxLong := 0
+	for i < len(arr)-1 {
+		isPeak := false
+		if arr[i] > arr[i-1] && arr[i] > arr[i+1] {
+			isPeak = true
+		}
+
+		if isPeak {
+			fmt.Println("peak=", i)
+			fmt.Println("peak=", arr[i])
+
+			currentLong := 3
+
+			idxLeft := i - 2
+			for idxLeft >= 0 && arr[idxLeft] < arr[idxLeft+1] {
+				currentLong++
+				idxLeft--
+			}
+			idxRight := i + 2
+			for idxRight <= len(arr)-1 && arr[idxRight] < arr[idxRight-1] {
+				currentLong++
+				idxRight++
+			}
+
+			maxLong = MaxInt(maxLong, currentLong)
+
+		}
+
+		i += 1
+	}
+	fmt.Print("maxLong=", maxLong)
+}
+
+func ArrOfProducts() {
+	//arr := []int{5, 1, 4, 2}
+	arr := []int{9, 3, 2, 1, 9, 5, 3, 2}
+
+	var sol []int
+	for i := range arr {
+		multiplies := 1
+		for j := range arr {
+			if i != j {
+				multiplies = multiplies * arr[j]
+			}
+		}
+
+		sol = append(sol, multiplies)
+	}
+	fmt.Print("sol=", sol)
+}
+
+func FirstDuplicated() {
+	arr := []int{2, 1, 5, 3, 3, 2, 4}
+	duplicated := -1
+
+	memo := make(map[int]bool)
+	for _, el := range arr {
+		if memo[el] {
+			duplicated = el
+			break
+		}
+		memo[el] = true
+	}
+
+	fmt.Print("duplicated=", duplicated)
+}
+
+func FourNumberSum() {
+	arr := []int{7, 6, 4, -1, 1, 2}
+	targetSum := 100
+
+	var quadruplets [][]int
+	var finalQuadruplets [][]int
+
+	for i1 := 0; i1 <= len(arr)-4; i1++ {
+		for i2 := i1 + 1; i2 <= len(arr)-3; i2++ {
+			for i3 := i2 + 1; i3 <= len(arr)-2; i3++ {
+				for i4 := i3 + 1; i4 <= len(arr)-1; i4++ {
+					quadruplet := []int{arr[i1], arr[i2], arr[i3], arr[i4]}
+					quadruplets = append(quadruplets, quadruplet)
+				}
+			}
+		}
+	}
+
+	// select sum that is equal to target
+	for i :=range quadruplets{
+		sum:=0
+		for j := range quadruplets[i]{
+			sum+=quadruplets[i][j]
+		}
+		if sum==targetSum{
+			finalQuadruplets=append(finalQuadruplets, quadruplets[i])
+		}
+	}
+
+	fmt.Println(quadruplets)
+	fmt.Println(finalQuadruplets)
+}
+
+func SubArrSort(){
+	arr:=[]int{1,2,4,7,10,11,7,12,6,7,16,18,19}
+	arr2:=make([]int,len(arr))
+	copy(arr2,arr)
+	sort.Ints(arr2)
+	fmt.Println(arr)
+	fmt.Println(arr2)
+
+
+	idxMin:=0
+	idxMax:=0
+	sol:=[]int{idxMin,idxMax}
+
+	for i :=range arr{
+		if arr[i]!=arr2[i]{
+			idxMin=i
+			break
+		}
+	}
+	for i:=range arr{
+		if arr[len(arr)-i-1]!=arr2[len(arr)-i-1]{
+			idxMax=len(arr)-i-1
+			break
+		}
+	}
+	sol[0]=idxMin
+	sol[1]=idxMax
+	fmt.Println(idxMin)
+	fmt.Println(idxMax)
+	fmt.Println(sol)
+}
+
+
+
+
 func StartThis() {
 	//fmt.Println(ThreeNumberSum([]int{12, 3, 1, 2, -6, 5, -8, 6}, 0))
 	//fmt.Println(SmallestDifference([]int{-1, 5, 10, 20, 28, 3}, []int{26, 134, 135, 15, 17}))
@@ -426,6 +610,12 @@ func StartThis() {
 	//fmt.Println(IsMonotonic([]int{-1, -5, -10, -1100, -1100, -1101, -1102, -9001}))
 
 	//fmt.Println(SwapsToOrderAsc([]int{1, 3, 5, 2, 4, 6, 7}))
-	fmt.Println(SpiralTraverse2())
+	//fmt.Println(SpiralTraverse())
+	//selectAWinner()
 
+	//LongestPeak()
+	//ArrOfProducts()
+	//FirstDuplicated()
+	//FourNumberSum()
+	SubArrSort()
 }
