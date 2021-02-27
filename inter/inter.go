@@ -5,33 +5,32 @@ import (
 	"fmt"
 	"os"
 	"sort"
+	"strconv"
 	"strings"
 )
 
-
-
 func StartThis() {
 	//var numbers []int32
-	numbers :=[]int32{6,2,4,10}
+	numbers := []int32{6, 2, 4, 10}
 	sort.Slice(numbers, func(i, j int) bool { return numbers[i] < numbers[j] })
 
-	minDiff:=numbers[0]-numbers[1]
+	minDiff := numbers[0] - numbers[1]
 	if minDiff < 0 {
-		minDiff=minDiff*-1
+		minDiff = minDiff * -1
 	}
-	fmt.Println("minDiff=",minDiff)
-	for i := range numbers{
+	fmt.Println("minDiff=", minDiff)
+	for i := range numbers {
 		//fmt.Println(numbers[i])
-		if i<len(numbers)-1 {
-			diff:=numbers[i+1]-numbers[i]
-			if diff==minDiff {
-				fmt.Println(numbers[i],numbers[i+1])
+		if i < len(numbers)-1 {
+			diff := numbers[i+1] - numbers[i]
+			if diff == minDiff {
+				fmt.Println(numbers[i], numbers[i+1])
 			}
 		}
 	}
 }
 
-func Prob1(){
+func Prob1() {
 	fmt.Println("in Prob1")
 	// Declaring some variables
 	var inpu1 int
@@ -48,14 +47,21 @@ func Prob1(){
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter a string: ")
 
-	text:=""
+	text := ""
 	if t, _ := reader.ReadString('\n'); true {
 		text = strings.Trim(t, " \n")
 	}
-	fmt.Println("text=",text)
+	fmt.Println("text=", text)
 
 	split := strings.Split(text, " ")
 
-	fmt.Println("split",split)
+	var arr1 []int
+	for _, el := range split {
+		myInt, _ := strconv.Atoi(el)
+		arr1 = append(arr1, myInt)
+	}
+
+	fmt.Println("split", split)
+	fmt.Println("arr1", arr1)
 
 }
