@@ -1,6 +1,6 @@
 package main
 
-import "github.com/scyanh/HackerRank/inter"
+import "fmt"
 
 func main() {
 	// Modify Sequence *******
@@ -40,6 +40,31 @@ func main() {
 	// Arrays
 	//arrays.StartThis()
 
-	// Interview
-	inter.Prob1()
+	// Inter
+	//inter.Prob1()
+
+	// Inter V
+	//inter.V1()
+	//inter.V2()
+	array := []int{8, 5, 2, 9, 5, 6, 3}
+	fmt.Println(SortAscending(array))
+}
+
+func helperSwapAsc(array []int, idx int){
+	array[idx-1], array[idx]=array[idx], array[idx-1]
+}
+
+func SortAscending(items []int) []int{
+	isOrdered:=true
+
+	for i,e:=range items{
+		if i>0 && e<items[i-1]{
+			isOrdered=false
+			helperSwapAsc(items, i)
+		}
+	}
+	if isOrdered{
+		return items
+	}
+	return SortAscending(items)
 }
