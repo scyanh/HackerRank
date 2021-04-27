@@ -2,7 +2,14 @@ package sorting
 
 import (
 	"fmt"
+	"sort"
 )
+
+func sortPkg(){
+	s := []int{4, 2, 3, 1}
+	sort.Ints(s)
+	fmt.Println(s)
+}
 
 // Sort array Bubble
 func sortThis(array []int) []int {
