@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 func main() {
+
 	// Modify Sequence *******
 	//arr:=[]int32{5,4,3,4,5}
 	//dynamicProgramming.StartThis()
@@ -39,6 +40,8 @@ func main() {
 
 	// Arrays
 	//arrays.StartThis()
+	//array := []int{8, 5, 2, 9, 5, 6, 3}
+	//fmt.Println(SortAscending(array))
 
 	// Inter
 	//inter.Prob1()
@@ -46,10 +49,39 @@ func main() {
 	// Inter V
 	//inter.V1()
 	//inter.V2()
-	array := []int{8, 5, 2, 9, 5, 6, 3}
-	fmt.Println(SortAscending(array))
+
+	// Binary tree
+	//binary_trees.Start()
+
+	// Stacks
+	//stacks.Start()
+
+	arr := [][]int{
+		{10, 20},
+		{30, 200},
+		{400, 50},
+		{30, 20},
+	}
+	distance := minDistance(arr)
+	fmt.Println("min distance=",distance)
 }
 
+func getMin(a, b int) int {
+	if a <= b {
+		return a
+	}
+	return b
+}
+
+func minDistance(arr [][]int) int {
+	sum := 0
+	for _, el := range arr {
+		sum += getMin(el[0], el[1])
+	}
+	return sum
+}
+
+/*
 func helperSwapAsc(array []int, idx int){
 	array[idx-1], array[idx]=array[idx], array[idx-1]
 }
@@ -68,3 +100,5 @@ func SortAscending(items []int) []int{
 	}
 	return SortAscending(items)
 }
+
+*/
