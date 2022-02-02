@@ -3,6 +3,7 @@ package basics
 import (
 	"fmt"
 	"strconv"
+	"sync"
 )
 
 // string to int
@@ -75,3 +76,37 @@ func createGoRoutine() {
 	msg := <-messages
 	fmt.Println(msg)
 }
+
+// waitgroup
+func withWaitgroup() {
+	arrList := []string{"1", "2", "3", "4", "5", "6", "7", "8", "10"}
+	wg := &sync.WaitGroup{}
+	for _, number := range arrList {
+		wg.Add(1)
+		go func(number string) {
+			fmt.Println(number)
+			wg.Done()
+		}(number)
+	}
+	wg.Wait()
+	fmt.Println("done")
+}
+
+/* with channel
+var c chan string
+func hola(txt string, c chan string){
+	fmt.Println(txt)
+	c <- "done"
+}
+func main() {
+	arrList := []string{"1", "2", "3", "4", "5", "6", "7", "8", "10"}
+	c := make(chan string, len(arrList))
+	for _, number := range arrList {
+		go hola(number, c)
+	}
+	msg:=""
+	for range arrList {
+		msg = <-c
+	}
+	fmt.Println(msg)
+}*/
